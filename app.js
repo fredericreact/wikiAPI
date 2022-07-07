@@ -83,6 +83,20 @@ app.route("/articles/:articleTitle")
       }
     }
   );
+})
+
+.patch(function(req,res){
+  Article.update(
+    {title: req.params.articleTitle},
+    {$set: req.body},
+    function(err){
+      if(!err){
+        res.send("success")
+      } else {
+        res.send(err);
+      }
+    }
+  );
 });
 
 app.listen(3000, function() {
