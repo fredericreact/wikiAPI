@@ -71,6 +71,18 @@ app.route("/articles/:articleTitle")
       res.send("No article found");
     }
   });
+})
+
+.put(function(req,res){
+  Article.replaceOne(
+    {title: req.params.articleTitle},
+    {title: req.body.title, content: req.body.content},
+    function(err) {
+      if (!err) {
+        res.send("success");
+      }
+    }
+  );
 });
 
 app.listen(3000, function() {
