@@ -86,12 +86,25 @@ app.route("/articles/:articleTitle")
 })
 
 .patch(function(req,res){
-  Article.update(
+  Article.updateOne(
     {title: req.params.articleTitle},
     {$set: req.body},
     function(err){
       if(!err){
         res.send("success")
+      } else {
+        res.send(err);
+      }
+    }
+  );
+})
+
+.delete(function(req,res) {
+  Article.deleteOne(
+    {title:req.params.articleTitle},
+    function(err){
+      if(!err){
+        res.send("success");
       } else {
         res.send(err);
       }
